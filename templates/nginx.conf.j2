@@ -1,0 +1,26 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+events {
+  worker_connections 1024;
+}
+http {
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+  keepalive_timeout 65;
+  server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    root /var/www/html;
+    index index.html;
+    location / {
+      try_files $uri $uri/ =404;
+    }
+  }
+  # Add custom variable to nginx config
+  add_header X-FIO "{{ fio }}";
+  add_header X-Group-Number "{{ group_number }}";
+  add_header X-Variant-Number "{{ variant_number }}";
+}

@@ -1,0 +1,6 @@
+nginx_version: "1.20.1"
+nginx_template_file: "/etc/nginx/nginx.conf"
+nginx_template: "templates/nginx.conf.j2"
+fio: "Иванов Иван Иванович"
+group_number: "12345"
+variant_number: "4"
