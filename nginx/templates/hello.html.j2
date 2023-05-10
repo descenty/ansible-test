@@ -1,0 +1,31 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div>
+      <p>ФИО:</p>
+      <p>{{fio}}</p>
+      <p>Группа:</p>
+      <p>{{group_number}}</p>
+      <p>Номер варианта:</p>
+      <p>{{variant_number}}</p>
+    </div>
+  </body>
+  <style>
+    div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 300px;
+      height: 200px;
+      padding-inline: 1.5em;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</html>

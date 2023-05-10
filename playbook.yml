@@ -1,5 +1,9 @@
-- name: Apply nginx role to servers
-  hosts: nodes
+- name: Install and config Nginx via Role
+  hosts: all
   become: true
   roles:
-    - nginx
+  - nginx
+  tasks:
+    - name: Install patch
+      apt: name=patch state=present update_cache=true
+    

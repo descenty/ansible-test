@@ -7,13 +7,10 @@ Vagrant.configure("2") do |config|
     node.vm.box = "debian/bullseye64"
     node.vm.network "public_network", ip: "192.168.0.6", bridge: "Realtek RTL8822CE 802.11ac PCIe Adapter"
   end
-  config.vm.define "node3" do |node|
-    node.vm.box = "debian/bullseye64"
-    node.vm.network "public_network", ip: "192.168.0.7", bridge: "Realtek RTL8822CE 802.11ac PCIe Adapter"
-    node.vm.provision "ansible" do |ansible|
-      ansible.verbose = "v"
-      ansible.playbook = "playbook.yml"
-      ansible.inventory_path = "hosts.ini"
-    end
-  end
+  config.vm.provision "shell", inline: <<-SHELL
+    echo -e "vagrant\nvagrant" | passwd root
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    sed -in 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+    service ssh restart
+  SHELL
 end
