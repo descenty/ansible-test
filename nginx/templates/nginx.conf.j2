@@ -20,8 +20,4 @@ http {
       try_files $uri $uri/ $uri.html =404;
     }
   }
-  # Add custom variable to nginx config
-  add_header X-FIO "{{ fio }}";
-  add_header X-Group-Number "{{ group_number }}";
-  add_header X-Variant-Number "{{ variant_number }}";
 }

@@ -2,8 +2,10 @@
   hosts: all
   become: true
   roles:
-  - nginx
+    - nginx
   tasks:
     - name: Install patch
-      apt: name=patch state=present update_cache=true
-    
+      apt:
+        name: patch
+        state: present
+        update_cache: true

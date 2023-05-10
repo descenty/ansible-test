@@ -1,8 +1,10 @@
 - name: Install nginx
-  apt: name=nginx state=present
+  apt:
+    name: nginx
+    state: present
+    update-cache: true
   when: ansible_os_family == "Debian"
-  notify:
-    - Nginx Systemd
+  notify: Nginx Systemd
 
 - name: Replace config file
   vars:
@@ -17,10 +19,6 @@
   failed_when: result.failed == true
   notify: Reload Nginx
   
-- name: Copy index file
-  copy: src=files/index.html dest={{ html_dir }} mode=0644
-  notify: Reload Nginx
-
 - name: Generate dynamic HTML from template
-  template: src=templates/hello.html.j2 dest={{ html_dir }}/hello.html owner=root mode=0644
+  template: src=templates/index.html.j2 dest={{ html_dir }} owner=root mode=0644
   notify: Reload Nginx
